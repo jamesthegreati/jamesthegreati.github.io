@@ -3,321 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of James - Web, Cloud & AI Engineer/Developer specializing in modern web applications, cloud solutions, and artificial intelligence.">
-    <title>James - Web, Cloud & AI Engineer</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Multi-Verse Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .galaxy-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            z-index: -1;
+        }
+
+        .stars {
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            box-shadow:
+                /* Create a starfield with multiple box-shadows */
+                -50vw 20vh 0 0 #fff,
+                40vw -30vh 1px 0 #fff,
+                -20vw -40vh 0 0 #fff,
+                /* ... add as many stars as you like */
+                80vw 50vh 1px 0 #fff;
+            animation: zoom 15s infinite;
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .verse-selector {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 4em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 50px;
+            text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+        }
+
+        .verse-portals {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .portal {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            border: 2px solid;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .portal:hover {
+            transform: scale(1.1);
+        }
+
+        #cyberpunk {
+            border-color: #0f0;
+            box-shadow: 0 0 20px #0f0;
+        }
+        #cyberpunk:hover { box-shadow: 0 0 30px #0f0, 0 0 40px #0f0; }
+
+        #retro {
+            border-color: #ff0;
+            box-shadow: 0 0 20px #ff0;
+        }
+        #retro:hover { box-shadow: 0 0 30px #ff0, 0 0 40px #ff0; }
+
+        #nature {
+            border-color: #0f0;
+            box-shadow: 0 0 20px #0f0;
+        }
+        #nature:hover { box-shadow: 0 0 30px #0f0, 0 0 40px #0f0; }
+
+        #classic {
+            border-color: #00f;
+            box-shadow: 0 0 20px #00f;
+        }
+        #classic:hover { box-shadow: 0 0 30px #00f, 0 0 40px #00f; }
+
+    </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen">
-        <div class="loading-spinner"></div>
+    <div class="galaxy-background">
+        <div class="stars"></div>
     </div>
-    
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">James</a>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#expertise" class="nav-link">Expertise</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-                <span class="hamburger"></span>
-            </button>
+
+    <div class="verse-selector">
+        <h1>Choose Your Verse</h1>
+        <div class="verse-portals">
+            <a href="verses/cyberpunk/index.html" class="portal" id="cyberpunk">Cyberpunk</a>
+            <a href="verses/retro/index.html" class="portal" id="retro">Retro</a>
+            <a href="verses/nature/index.html" class="portal" id="nature">Nature</a>
+            <a href="verses/classic/index.html" class="portal" id="classic">Classic</a>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-container">
-            <div class="hero-content fade-in">
-                <h1 class="hero-title">
-                    <span class="hero-title-line">Web. Cloud. AI.</span>
-                    <span class="hero-title-line">Engineering Excellence.</span>
-                </h1>
-                <p class="hero-subtitle">Crafting innovative digital experiences with cutting-edge technology</p>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="floating-card card-1">
-                    <div class="icon-cloud">☁️</div>
-                </div>
-                <div class="floating-card card-2">
-                    <div class="icon-ai">🤖</div>
-                </div>
-                <div class="floating-card card-3">
-                    <div class="icon-web">🌐</div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span class="scroll-text">Scroll to explore</span>
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- Expertise Section -->
-    <section class="expertise section" id="expertise">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">What I Do</span>
-                <h2 class="section-title">Expertise & Skills</h2>
-                <p class="section-description">Delivering comprehensive solutions across the full technology stack</p>
-            </div>
-            <div class="expertise-grid">
-                <div class="expertise-card fade-in-up">
-                    <div class="expertise-icon">
-                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                            <path d="M8 8H40V40H8V8Z" stroke="currentColor" stroke-width="2"/>
-                            <path d="M16 20L24 28L32 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="expertise-title">Web Development</h3>
-                    <p class="expertise-description">Building responsive, high-performance web applications with modern frameworks and technologies. Expert in React, Vue, Node.js, and progressive web apps.</p>
-                    <ul class="expertise-tags">
-                        <li>React</li>
-                        <li>Vue.js</li>
-                        <li>Node.js</li>
-                        <li>TypeScript</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card fade-in-up">
-                    <div class="expertise-icon">
-                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                            <path d="M24 8L8 16V32L24 40L40 32V16L24 8Z" stroke="currentColor" stroke-width="2"/>
-                            <path d="M24 24V40" stroke="currentColor" stroke-width="2"/>
-                            <path d="M8 16L24 24L40 16" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h3 class="expertise-title">Cloud Solutions</h3>
-                    <p class="expertise-description">Architecting scalable cloud infrastructure and serverless applications. Experienced with AWS, Azure, GCP, Docker, and Kubernetes for enterprise-grade solutions.</p>
-                    <ul class="expertise-tags">
-                        <li>AWS</li>
-                        <li>Azure</li>
-                        <li>Docker</li>
-                        <li>Kubernetes</li>
-                    </ul>
-                </div>
-
-                <div class="expertise-card fade-in-up">
-                    <div class="expertise-icon">
-                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                            <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/>
-                            <path d="M24 8V24L32 32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="expertise-title">AI & Machine Learning</h3>
-                    <p class="expertise-description">Implementing intelligent systems and machine learning models. Proficient in TensorFlow, PyTorch, natural language processing, and computer vision applications.</p>
-                    <ul class="expertise-tags">
-                        <li>TensorFlow</li>
-                        <li>PyTorch</li>
-                        <li>NLP</li>
-                        <li>Computer Vision</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects section" id="projects">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Portfolio</span>
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-description">A selection of recent work showcasing innovative solutions</p>
-            </div>
-            <div class="projects-grid">
-                <article class="project-card fade-in-up">
-                    <div class="project-image">
-                        <div class="project-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                            <span class="project-icon">🚀</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Cloud-Native E-Commerce Platform</h3>
-                        <p class="project-description">Scalable microservices architecture deployed on AWS with automated CI/CD, handling 100K+ daily transactions with 99.99% uptime.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">Docker</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card fade-in-up">
-                    <div class="project-image">
-                        <div class="project-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                            <span class="project-icon">🤖</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">AI-Powered Content Analysis Tool</h3>
-                        <p class="project-description">Machine learning system for sentiment analysis and content categorization, processing millions of documents with 95% accuracy.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">NLP</span>
-                            <span class="tech-tag">FastAPI</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card fade-in-up">
-                    <div class="project-image">
-                        <div class="project-placeholder" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                            <span class="project-icon">⚡</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Real-Time Analytics Dashboard</h3>
-                        <p class="project-description">Enterprise dashboard with live data visualization, WebSocket integration, and predictive analytics for business intelligence.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Vue.js</span>
-                            <span class="tech-tag">D3.js</span>
-                            <span class="tech-tag">WebSocket</span>
-                            <span class="tech-tag">Azure</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card fade-in-up">
-                    <div class="project-image">
-                        <div class="project-placeholder" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                            <span class="project-icon">🌐</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Serverless API Gateway</h3>
-                        <p class="project-description">Highly scalable serverless architecture using Lambda functions and API Gateway, reducing infrastructure costs by 60%.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">AWS Lambda</span>
-                            <span class="tech-tag">API Gateway</span>
-                            <span class="tech-tag">DynamoDB</span>
-                            <span class="tech-tag">TypeScript</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about section" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-content fade-in-up">
-                    <span class="section-label">About Me</span>
-                    <h2 class="section-title">Building the Future of Technology</h2>
-                    <p class="about-text">With years of experience spanning web development, cloud architecture, and artificial intelligence, I specialize in creating innovative solutions that drive business growth and user satisfaction.</p>
-                    <p class="about-text">My passion lies in leveraging cutting-edge technologies to solve complex problems. From designing scalable cloud infrastructures to implementing AI-driven features, I bring a holistic approach to every project.</p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Projects Completed</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">15+</span>
-                            <span class="stat-label">Technologies Mastered</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Client Satisfaction</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual fade-in-up">
-                    <div class="about-image-container">
-                        <div class="about-image-placeholder">
-                            <div class="tech-orbit">
-                                <div class="orbit-item orbit-1">☁️</div>
-                                <div class="orbit-item orbit-2">🤖</div>
-                                <div class="orbit-item orbit-3">🌐</div>
-                                <div class="orbit-item orbit-4">⚡</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact section" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Get In Touch</span>
-                <h2 class="section-title">Let's Work Together</h2>
-                <p class="section-description">Ready to bring your project to life? Let's discuss how I can help</p>
-            </div>
-            <div class="contact-content fade-in-up">
-                <form class="contact-form" id="contact-form">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tell me about your project..." rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">Send Message</button>
-                </form>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <a href="mailto:hello@jamesdesign.me">hello@jamesdesign.me</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">💼</div>
-                        <div class="contact-details">
-                            <h4>LinkedIn</h4>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">Connect with me</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🐙</div>
-                        <div class="contact-details">
-                            <h4>GitHub</h4>
-                            <a href="https://github.com/jamesthegreati" target="_blank" rel="noopener noreferrer">View my code</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p class="footer-text">© 2024 James. Crafted with passion and precision.</p>
-                <div class="footer-links">
-                    <a href="https://github.com/jamesthegreati" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-                    <a href="mailto:hello@jamesdesign.me" class="footer-link">Email</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    </div>
 </body>
 </html>
