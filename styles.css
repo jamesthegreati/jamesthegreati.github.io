@@ -636,14 +636,15 @@ a {
 }
 
 .checklist-preview {
-    background: white;
+    background: var(--bg-card);
     padding: 2rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xl);
+    border: 1px solid var(--bg-tertiary);
 }
 
 .checklist-page {
-    background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
+    background: var(--bg-tertiary);
     padding: 2rem;
     border-radius: var(--radius-md);
 }
@@ -656,7 +657,7 @@ a {
     margin: 0.5rem 0;
     background: rgba(167, 139, 250, 0.05);
     border-radius: var(--radius-sm);
-    color: #1a1f2e;
+    color: var(--text-primary);
 }
 
 .check-item span {

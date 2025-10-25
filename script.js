@@ -206,6 +206,70 @@ if (restartScoper) {
     });
 }
 
+// ===== Notification System =====
+function showNotification(message, type = 'info') {
+    const existingNotification = document.querySelector('.custom-notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = `custom-notification notification-${type}`;
+    notification.textContent = message;
+    
+    Object.assign(notification.style, {
+        position: 'fixed',
+        top: '100px',
+        right: '20px',
+        padding: '1rem 1.5rem',
+        backgroundColor: type === 'success' ? 'var(--accent-secondary)' : 'var(--primary-color)',
+        color: 'white',
+        borderRadius: 'var(--radius-md)',
+        boxShadow: 'var(--shadow-lg)',
+        zIndex: '10001',
+        animation: 'slideInRight 0.3s ease',
+        maxWidth: '400px',
+        fontFamily: 'var(--font-primary)',
+        fontSize: '0.95rem'
+    });
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// Add notification animations
+if (!document.querySelector('#notification-styles')) {
+    const style = document.createElement('style');
+    style.id = 'notification-styles';
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
 // ===== Interactive Demos =====
 
 // Play buttons for showcases
@@ -214,7 +278,8 @@ playButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         sounds.click();
         const card = e.target.closest('.showcase-card');
-        alert(`Demo: ${card.querySelector('h3').textContent}\n\nThis would open an interactive full-screen demo!`);
+        const demoTitle = card.querySelector('h3').textContent;
+        showNotification(`🎮 ${demoTitle} demo would open here in full-screen mode!`, 'info');
     });
 });
 
@@ -615,7 +680,11 @@ downloadResourceBtns.forEach(btn => {
         e.preventDefault();
         sounds.click();
         const resource = btn.dataset.resource;
-        alert(`Downloading: ${resource}\n\nIn a real implementation, this would download a beautifully designed PDF!`);
+        const resourceNames = {
+            'ux-checklist': '10-Point UX/UI Pre-Flight Checklist'
+        };
+        const resourceName = resourceNames[resource] || resource;
+        showNotification(`📥 Downloading ${resourceName}... In production, this would be a beautifully designed PDF!`, 'success');
     });
 });
 
