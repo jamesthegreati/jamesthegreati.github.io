@@ -57,6 +57,33 @@ function activateWorld(worldName) {
     sounds.whoosh();
     currentWorld = worldName;
     
+    // Add portal burst animation
+    const portalOverlay = document.createElement('div');
+    portalOverlay.className = 'portal-transition-overlay';
+    portalOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        pointer-events: none;
+    `;
+    
+    // World-specific colors
+    const colors = {
+        web: 'rgba(96, 165, 250, 0.8)',
+        cloud: 'rgba(52, 211, 153, 0.8)',
+        ai: 'rgba(167, 139, 250, 0.8)'
+    };
+    
+    portalOverlay.style.background = `radial-gradient(circle at center, ${colors[worldName]}, transparent)`;
+    portalOverlay.style.animation = 'portalBurst 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards';
+    
+    document.body.appendChild(portalOverlay);
+    
+    setTimeout(() => portalOverlay.remove(), 800);
+    
     // Hide hub, show world
     if (worldHub) worldHub.style.display = 'none';
     
@@ -277,10 +304,168 @@ const playButtons = document.querySelectorAll('.play-btn');
 playButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         sounds.click();
+        const demoType = btn.dataset.demoType;
         const card = e.target.closest('.showcase-card');
-        const demoTitle = card.querySelector('h3').textContent;
-        showNotification(`🎮 ${demoTitle} demo would open here in full-screen mode!`, 'info');
+        
+        if (demoType === 'drag-drop') {
+            activateDragDrop(card);
+            btn.textContent = 'Active ✓';
+            btn.style.background = 'var(--accent-secondary)';
+        } else if (demoType === 'component-library') {
+            activateComponentDemo(card);
+        } else if (demoType === 'css-art') {
+            const shape = card.querySelector('.morphing-shape');
+            shape.style.animationPlayState = shape.style.animationPlayState === 'paused' ? 'running' : 'paused';
+        } else {
+            const demoTitle = card.querySelector('h3').textContent;
+            showNotification(`🎮 ${demoTitle} demo would open here in full-screen mode!`, 'info');
+        }
     });
+});
+
+// Activate drag and drop
+function activateDragDrop(card) {
+    const draggableCards = card.querySelectorAll('.draggable-card');
+    const dropZone = card.querySelector('.drop-zone');
+    
+    draggableCards.forEach(draggable => {
+        draggable.setAttribute('draggable', 'true');
+        
+        draggable.addEventListener('dragstart', (e) => {
+            draggable.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', draggable.innerHTML);
+        });
+        
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging');
+        });
+    });
+    
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(dropZone, e.clientY);
+        const dragging = dropZone.querySelector('.dragging');
+        if (afterElement == null) {
+            dropZone.appendChild(dragging);
+        } else {
+            dropZone.insertBefore(dragging, afterElement);
+        }
+    });
+}
+
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.draggable-card:not(.dragging)')];
+    
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+// Activate component library demo
+function activateComponentDemo(card) {
+    const toggleSwitch = card.querySelector('.toggle-switch');
+    const toggleSlider = toggleSwitch.querySelector('.toggle-slider');
+    const demoButtons = card.querySelectorAll('.demo-button');
+    
+    let isDark = false;
+    
+    toggleSwitch.addEventListener('click', () => {
+        sounds.click();
+        isDark = !isDark;
+        
+        if (isDark) {
+            toggleSlider.style.transform = 'translateX(24px)';
+            toggleSwitch.style.background = 'var(--primary-color)';
+            card.querySelector('.component-demo').style.background = '#1a1f2e';
+            demoButtons.forEach(btn => {
+                btn.style.filter = 'brightness(1.2)';
+            });
+        } else {
+            toggleSlider.style.transform = 'translateX(0)';
+            toggleSwitch.style.background = 'var(--bg-tertiary)';
+            card.querySelector('.component-demo').style.background = 'var(--bg-tertiary)';
+            demoButtons.forEach(btn => {
+                btn.style.filter = 'none';
+            });
+        }
+    });
+}
+
+// Testimonials Carousel
+let currentTestimonial = 0;
+const testimonialCards = document.querySelectorAll('.testimonial-card');
+const carouselDots = document.querySelectorAll('.carousel-dots .dot');
+const prevBtn = document.querySelector('.carousel-btn.prev');
+const nextBtn = document.querySelector('.carousel-btn.next');
+
+function showTestimonial(index) {
+    testimonialCards.forEach((card, i) => {
+        card.classList.remove('active');
+        if (i === index) {
+            card.classList.add('active');
+        }
+    });
+    
+    carouselDots.forEach((dot, i) => {
+        dot.classList.remove('active');
+        if (i === index) {
+            dot.classList.add('active');
+        }
+    });
+}
+
+if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+        sounds.click();
+        currentTestimonial = (currentTestimonial - 1 + testimonialCards.length) % testimonialCards.length;
+        showTestimonial(currentTestimonial);
+    });
+}
+
+if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        sounds.click();
+        currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+        showTestimonial(currentTestimonial);
+    });
+}
+
+carouselDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        sounds.click();
+        currentTestimonial = index;
+        showTestimonial(currentTestimonial);
+    });
+});
+
+// Auto-rotate testimonials
+let testimonialInterval = setInterval(() => {
+    if (testimonialCards.length > 0) {
+        currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+        showTestimonial(currentTestimonial);
+    }
+}, 5000);
+
+// Pause on hover
+document.querySelector('.testimonials-carousel')?.addEventListener('mouseenter', () => {
+    clearInterval(testimonialInterval);
+});
+
+document.querySelector('.testimonials-carousel')?.addEventListener('mouseleave', () => {
+    testimonialInterval = setInterval(() => {
+        if (testimonialCards.length > 0) {
+            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+            showTestimonial(currentTestimonial);
+        }
+    }, 5000);
 });
 
 // Copy code buttons
@@ -298,6 +483,110 @@ copyCodeButtons.forEach(btn => {
         }
     });
 });
+
+// Pipeline Simulation
+const simulatePipelineBtn = document.querySelector('.simulate-pipeline');
+if (simulatePipelineBtn) {
+    simulatePipelineBtn.addEventListener('click', () => {
+        sounds.click();
+        const stages = document.querySelectorAll('.pipeline-stage');
+        const statuses = document.querySelectorAll('.stage-status');
+        
+        // Reset all stages
+        stages.forEach((stage, index) => {
+            stage.style.transform = 'scale(1)';
+            stage.style.borderColor = 'transparent';
+            statuses[index].style.background = 'var(--bg-tertiary)';
+            statuses[index].textContent = '●';
+        });
+        
+        // Animate stages sequentially
+        stages.forEach((stage, index) => {
+            setTimeout(() => {
+                stage.style.transform = 'scale(1.1)';
+                stage.style.borderColor = 'var(--cloud-color)';
+                statuses[index].style.background = 'var(--accent-secondary)';
+                statuses[index].textContent = '✓';
+                sounds.whoosh();
+                
+                setTimeout(() => {
+                    stage.style.transform = 'scale(1)';
+                }, 300);
+            }, index * 800);
+        });
+        
+        // Show completion notification
+        setTimeout(() => {
+            showNotification('✅ Pipeline completed successfully! All stages passed.', 'success');
+        }, stages.length * 800);
+    });
+}
+
+// Metrics Dashboard Animation
+function animateMetrics() {
+    const metricValues = document.querySelectorAll('[data-metric]');
+    
+    metricValues.forEach(metric => {
+        const metricType = metric.dataset.metric;
+        
+        // Animate counter for deploys
+        if (metricType === 'deploys') {
+            let count = 0;
+            const target = 42;
+            const interval = setInterval(() => {
+                count += 2;
+                metric.textContent = count;
+                if (count >= target) {
+                    metric.textContent = target;
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+    });
+    
+    // Draw sparkline
+    const sparklineCanvas = document.getElementById('uptime-sparkline');
+    if (sparklineCanvas) {
+        const ctx = sparklineCanvas.getContext('2d');
+        const data = [99.95, 99.97, 99.99, 99.98, 99.99, 99.99, 100, 99.99];
+        
+        ctx.strokeStyle = '#34D399';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        
+        data.forEach((value, i) => {
+            const x = (i / (data.length - 1)) * sparklineCanvas.width;
+            const y = sparklineCanvas.height - ((value - 99.9) / 0.1 * sparklineCanvas.height);
+            
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        
+        ctx.stroke();
+        
+        // Fill area under line
+        ctx.lineTo(sparklineCanvas.width, sparklineCanvas.height);
+        ctx.lineTo(0, sparklineCanvas.height);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(52, 211, 153, 0.1)';
+        ctx.fill();
+    }
+}
+
+// Run metrics animation when metrics dashboard is visible
+const metricsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateMetrics();
+            metricsObserver.unobserve(entry.target);
+        }
+    });
+});
+
+const metricsDashboard = document.querySelector('.metrics-dashboard');
+if (metricsDashboard) {
+    metricsObserver.observe(metricsDashboard);
+}
 
 // ===== Cloud Cost Calculator =====
 const cloudSpendInput = document.getElementById('cloud-spend');
