@@ -1,0 +1,16 @@
+# 10-Point UX/UI Pre-Flight Checklist
+
+1.  **Clarity:** Is the purpose of each page and component immediately obvious?
+2.  **Consistency:** Is the design language (colors, fonts, spacing) consistent throughout the application?
+3.  **Hierarchy:** Is there a clear visual hierarchy that guides the user's attention to the most important elements?
+4.  **Feedback:** Does the interface provide clear and immediate feedback for user actions?
+5.  **Simplicity:** Is the interface as simple as possible, without sacrificing functionality?
+6.  **Accessibility:** Is the application accessible to users with disabilities (e.g., keyboard navigation, screen reader support)?
+7.  **Performance:** Is the application fast and responsive?
+8.  **Mobile-Friendliness:** Does the application work well on a variety of screen sizes?
+9.  **Intuitiveness:** Is the interface easy to learn and use?
+10. **Delight:** Does the interface provide a delightful and engaging experience?
+
+---
+
+Ready to go beyond the checklist? Contact me at [Your Email].

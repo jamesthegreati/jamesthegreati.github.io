@@ -1,14 +1,39 @@
 'use client';
 
+import { useState } from 'react';
 import Hero from '@/components/Hero';
 import ProjectCard from '@/components/ProjectCard';
 import ProjectSaga from '@/components/ProjectSaga';
 import ResourceDownload from '@/components/ResourceDownload';
 import PortalTransition from '@/components/PortalTransition';
+import ProjectModal from '@/components/ProjectModal';
+
+const projects = [
+  {
+    title: 'Project One',
+    description: 'A brief description of the project.',
+    imageUrl: 'https://via.placeholder.com/400',
+    demo: <div>Interactive Demo for Project One</div>,
+  },
+  {
+    title: 'Project Two',
+    description: 'A brief description of the project.',
+    imageUrl: 'https://via.placeholder.com/400',
+    demo: <div>Interactive Demo for Project Two</div>,
+  },
+  {
+    title: 'Project Three',
+    description: 'A brief description of the project.',
+    imageUrl: 'https://via.placeholder.com/400',
+    demo: <div>Interactive Demo for Project Three</div>,
+  },
+];
 
 const WebPage = () => {
+  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null);
+
   return (
-    <PortalTransition>
+    <PortalTransition transitionType="web">
       <div className="container mx-auto px-4">
         <Hero
           title="Where Vision Becomes Experience."
@@ -19,21 +44,15 @@ const WebPage = () => {
           Play With The Code, Not Just See It.
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <ProjectCard
-            title="Project One"
-            description="A brief description of the project."
-            imageUrl="https://via.placeholder.com/400"
-          />
-          <ProjectCard
-            title="Project Two"
-            description="A brief description of the project."
-            imageUrl="https://via.placeholder.com/400"
-          />
-          <ProjectCard
-            title="Project Three"
-            description="A brief description of the project."
-            imageUrl="https://via.placeholder.com/400"
-          />
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              imageUrl={project.imageUrl}
+              onPlayClick={() => setSelectedProject(project)}
+            />
+          ))}
         </div>
       </section>
       <section className="my-16">
@@ -52,9 +71,18 @@ const WebPage = () => {
         <ResourceDownload
           title="Your Free UX Toolkit."
           description="The 10-Point UX/UI Pre-Flight Checklist."
-          downloadLink="/path-to-your-checklist.pdf"
+          downloadLink="/10-Point-UX-UI-Pre-Flight-Checklist.txt"
         />
       </section>
+      {selectedProject && (
+        <ProjectModal
+          isOpen={!!selectedProject}
+          onClose={() => setSelectedProject(null)}
+          title={selectedProject.title}
+        >
+          {selectedProject.demo}
+        </ProjectModal>
+      )}
     </div>
     </PortalTransition>
   );

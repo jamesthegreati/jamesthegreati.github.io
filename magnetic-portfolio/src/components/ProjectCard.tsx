@@ -7,9 +7,10 @@ interface ProjectCardProps {
   title: string;
   description: string;
   imageUrl: string;
+  onPlayClick: () => void;
 }
 
-const ProjectCard = ({ title, description, imageUrl }: ProjectCardProps) => {
+const ProjectCard = ({ title, description, imageUrl, onPlayClick }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -27,7 +28,10 @@ const ProjectCard = ({ title, description, imageUrl }: ProjectCardProps) => {
         <div className="text-center text-white">
           <h3 className="text-2xl font-bold">{title}</h3>
           <p>{description}</p>
-          <button className="mt-4 bg-coral-accent text-white px-4 py-2 rounded">
+          <button
+            onClick={onPlayClick}
+            className="mt-4 bg-coral-accent text-white px-4 py-2 rounded"
+          >
             Play
           </button>
         </div>

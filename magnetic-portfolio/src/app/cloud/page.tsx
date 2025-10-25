@@ -9,7 +9,7 @@ import PortalTransition from '@/components/PortalTransition';
 
 const CloudPage = () => {
   return (
-    <PortalTransition>
+    <PortalTransition transitionType="cloud">
       <div className="container mx-auto px-4">
         <Hero
           title="Infrastructure That Breathes."
@@ -24,13 +24,29 @@ const CloudPage = () => {
             language="yaml"
             code={`
 AWSTemplateFormatVersion: '2010-09-09'
-Description: A simple EC2 instance
+Description: An AWS Lambda function that triggers on an S3 event.
 Resources:
-  MyEC2Instance:
-    Type: 'AWS::EC2::Instance'
+  MyLambdaFunction:
+    Type: 'AWS::Lambda::Function'
     Properties:
-      InstanceType: t2.micro
-      ImageId: ami-0c55b159cbfafe1f0
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt MyLambdaExecutionRole.Arn
+      Code:
+        ZipFile: |
+          exports.handler = async (event) => {
+            console.log('S3 event:', JSON.stringify(event, null, 2));
+          };
+  MyLambdaExecutionRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: 'sts:AssumeRole'
             `}
           />
           <InteractivePipeline />
