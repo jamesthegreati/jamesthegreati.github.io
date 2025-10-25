@@ -484,6 +484,110 @@ copyCodeButtons.forEach(btn => {
     });
 });
 
+// Pipeline Simulation
+const simulatePipelineBtn = document.querySelector('.simulate-pipeline');
+if (simulatePipelineBtn) {
+    simulatePipelineBtn.addEventListener('click', () => {
+        sounds.click();
+        const stages = document.querySelectorAll('.pipeline-stage');
+        const statuses = document.querySelectorAll('.stage-status');
+        
+        // Reset all stages
+        stages.forEach((stage, index) => {
+            stage.style.transform = 'scale(1)';
+            stage.style.borderColor = 'transparent';
+            statuses[index].style.background = 'var(--bg-tertiary)';
+            statuses[index].textContent = '●';
+        });
+        
+        // Animate stages sequentially
+        stages.forEach((stage, index) => {
+            setTimeout(() => {
+                stage.style.transform = 'scale(1.1)';
+                stage.style.borderColor = 'var(--cloud-color)';
+                statuses[index].style.background = 'var(--accent-secondary)';
+                statuses[index].textContent = '✓';
+                sounds.whoosh();
+                
+                setTimeout(() => {
+                    stage.style.transform = 'scale(1)';
+                }, 300);
+            }, index * 800);
+        });
+        
+        // Show completion notification
+        setTimeout(() => {
+            showNotification('✅ Pipeline completed successfully! All stages passed.', 'success');
+        }, stages.length * 800);
+    });
+}
+
+// Metrics Dashboard Animation
+function animateMetrics() {
+    const metricValues = document.querySelectorAll('[data-metric]');
+    
+    metricValues.forEach(metric => {
+        const metricType = metric.dataset.metric;
+        
+        // Animate counter for deploys
+        if (metricType === 'deploys') {
+            let count = 0;
+            const target = 42;
+            const interval = setInterval(() => {
+                count += 2;
+                metric.textContent = count;
+                if (count >= target) {
+                    metric.textContent = target;
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+    });
+    
+    // Draw sparkline
+    const sparklineCanvas = document.getElementById('uptime-sparkline');
+    if (sparklineCanvas) {
+        const ctx = sparklineCanvas.getContext('2d');
+        const data = [99.95, 99.97, 99.99, 99.98, 99.99, 99.99, 100, 99.99];
+        
+        ctx.strokeStyle = '#34D399';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        
+        data.forEach((value, i) => {
+            const x = (i / (data.length - 1)) * sparklineCanvas.width;
+            const y = sparklineCanvas.height - ((value - 99.9) / 0.1 * sparklineCanvas.height);
+            
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        
+        ctx.stroke();
+        
+        // Fill area under line
+        ctx.lineTo(sparklineCanvas.width, sparklineCanvas.height);
+        ctx.lineTo(0, sparklineCanvas.height);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(52, 211, 153, 0.1)';
+        ctx.fill();
+    }
+}
+
+// Run metrics animation when metrics dashboard is visible
+const metricsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateMetrics();
+            metricsObserver.unobserve(entry.target);
+        }
+    });
+});
+
+const metricsDashboard = document.querySelector('.metrics-dashboard');
+if (metricsDashboard) {
+    metricsObserver.observe(metricsDashboard);
+}
+
 // ===== Cloud Cost Calculator =====
 const cloudSpendInput = document.getElementById('cloud-spend');
 const unusedInstancesInput = document.getElementById('unused-instances');
