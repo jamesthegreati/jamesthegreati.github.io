@@ -98,6 +98,18 @@
     --spacing-lg: 4rem;
     --spacing-xl: 6rem;
     
+    /* Image Filters */
+    --filter-vintage-sepia: sepia(0.25);
+    --filter-vintage-brightness: brightness(0.95);
+    --filter-hero-brightness: brightness(0.4);
+    --filter-hero-sepia: sepia(0.3);
+    --filter-workspace-sepia: sepia(0.3);
+    --filter-workspace-contrast: contrast(1.1);
+    
+    /* Overlay Colors */
+    --overlay-hero-start: rgba(212, 175, 55, 0.15);
+    --overlay-hero-end: rgba(76, 122, 119, 0.15);
+    
     /* Transitions - Easing Functions */
     --ease-expo-out: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-quad-inout: cubic-bezier(0.45, 0, 0.55, 1);
@@ -4964,7 +4976,7 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.4) sepia(0.3);
+    filter: var(--filter-hero-brightness) var(--filter-hero-sepia);
 }
 
 .hero-overlay {
@@ -4973,7 +4985,7 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(76, 122, 119, 0.15));
+    background: linear-gradient(135deg, var(--overlay-hero-start), var(--overlay-hero-end));
     mix-blend-mode: multiply;
 }
 
@@ -5005,7 +5017,7 @@ a {
     height: auto;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
-    filter: sepia(0.2) brightness(0.95);
+    filter: var(--filter-vintage-sepia) var(--filter-vintage-brightness);
 }
 
 .about-image-overlay {
@@ -5025,13 +5037,13 @@ a {
     height: auto;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
-    filter: sepia(0.3) contrast(1.1);
+    filter: var(--filter-workspace-sepia) var(--filter-workspace-contrast);
     transition: transform var(--transition-base);
 }
 
 .workspace-photo:hover {
     transform: scale(1.05);
-    filter: sepia(0.2) contrast(1.05);
+    filter: var(--filter-vintage-sepia) contrast(1.05);
 }
 
 /* ===== World-Specific Combined About & Contact Sections ===== */
