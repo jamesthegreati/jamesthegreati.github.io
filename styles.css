@@ -5401,19 +5401,20 @@ a {
 }
 
 .web-workspace-bg {
-    /* Anime-style image - lighter, more vibrant */
-    filter: sepia(0.2) contrast(1.1) brightness(0.85) saturate(1.1);
+    /* Enhanced anime-style image - more vibrant and appealing */
+    filter: sepia(0.15) contrast(1.2) brightness(0.9) saturate(1.3);
+    transform: scale(1.05);
 }
 
 .web-showcase-section .section-overlay {
-    /* Darker overlay for better text contrast on bright anime-style image */
+    /* Lighter overlay for better image visibility while maintaining text contrast */
     background: linear-gradient(
         135deg, 
-        rgba(102, 126, 234, 0.75) 0%, 
-        rgba(118, 75, 162, 0.7) 50%,
-        rgba(102, 126, 234, 0.75) 100%
+        rgba(102, 126, 234, 0.65) 0%, 
+        rgba(118, 75, 162, 0.55) 50%,
+        rgba(102, 126, 234, 0.65) 100%
     );
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
 }
 
 .web-showcase-section .container {
@@ -5424,15 +5425,39 @@ a {
 .web-showcase-section .section-title {
     color: #FFFFFF;
     text-shadow: 
-        2px 2px 8px rgba(0, 0, 0, 0.6),
-        0 0 20px rgba(102, 126, 234, 0.4);
+        3px 3px 12px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(102, 126, 234, 0.6),
+        0 0 50px rgba(118, 75, 162, 0.4);
     font-family: var(--font-retro-display);
+    letter-spacing: 3px;
 }
 
 .web-showcase-section .section-description {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    font-weight: 500;
+    color: rgba(255, 255, 255, 0.98);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+/* Enhanced showcase cards to make them pop */
+.web-showcase-section .showcase-card {
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 3px rgba(102, 126, 234, 0.3),
+        inset 0 2px 8px rgba(255, 255, 255, 0.6);
+    transform: translateY(0);
+    transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.web-showcase-section .showcase-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 
+        0 20px 60px rgba(102, 126, 234, 0.5),
+        0 0 0 4px rgba(118, 75, 162, 0.4),
+        0 0 80px rgba(102, 126, 234, 0.3),
+        inset 0 2px 12px rgba(255, 255, 255, 0.8);
 }
 
 /* Web Projects Section - Code Coming to Life Image */
@@ -5442,19 +5467,21 @@ a {
 }
 
 .web-projects-bg {
-    /* Magical anime-style image with vibrant colors */
-    filter: sepia(0.15) contrast(1.15) brightness(0.8) saturate(1.2);
+    /* Enhanced magical anime-style image */
+    filter: sepia(0.1) contrast(1.25) brightness(0.85) saturate(1.4) hue-rotate(-5deg);
+    transform: scale(1.08);
 }
 
 .web-projects-section .section-overlay {
-    /* Gradient overlay that complements the magical theme */
+    /* Refined gradient that enhances the magical theme */
     background: linear-gradient(
         180deg,
-        rgba(245, 236, 217, 0.85) 0%,
-        rgba(240, 229, 206, 0.9) 50%,
-        rgba(245, 236, 217, 0.85) 100%
+        rgba(245, 236, 217, 0.75) 0%,
+        rgba(240, 229, 206, 0.8) 30%,
+        rgba(235, 220, 195, 0.85) 70%,
+        rgba(245, 236, 217, 0.75) 100%
     );
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(0.5px);
 }
 
 .web-projects-section .container {
@@ -5465,13 +5492,36 @@ a {
 .web-projects-section .section-title {
     color: var(--mahogany);
     text-shadow: 
-        1px 1px 3px rgba(255, 255, 255, 0.6),
-        0 0 15px rgba(212, 175, 55, 0.3);
+        2px 2px 6px rgba(255, 255, 255, 0.8),
+        0 0 25px rgba(212, 175, 55, 0.5),
+        0 0 40px rgba(139, 115, 85, 0.3);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 .web-projects-section .section-description {
     color: var(--vintage-brown);
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+/* Enhanced project cards */
+.web-projects-section .saga-card {
+    background: rgba(248, 242, 227, 0.98);
+    backdrop-filter: blur(15px);
+    box-shadow: 
+        0 12px 48px rgba(139, 115, 85, 0.35),
+        0 0 0 3px rgba(212, 175, 55, 0.25),
+        inset 0 2px 6px rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.web-projects-section .saga-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+        0 20px 70px rgba(212, 175, 55, 0.5),
+        0 0 0 4px rgba(212, 175, 55, 0.4),
+        0 0 60px rgba(139, 115, 85, 0.3),
+        inset 0 2px 10px rgba(255, 255, 255, 0.7);
 }
 
 /* Web Testimonials Section - Creative Web Design Studio Image */
@@ -5482,17 +5532,20 @@ a {
 }
 
 .web-testimonials-bg {
-    /* Art deco style portrait image - elegant and refined */
-    filter: sepia(0.35) contrast(1.1) brightness(0.75);
+    /* Enhanced art deco style - elegant and refined */
+    filter: sepia(0.4) contrast(1.2) brightness(0.7) saturate(1.1);
+    transform: scale(1.05);
 }
 
 .web-testimonials-section .section-overlay {
-    /* Teal/gold overlay matching art deco palette */
+    /* Sophisticated teal/gold gradient with better depth */
     background: linear-gradient(
         135deg,
-        rgba(76, 122, 119, 0.8) 0%,
-        rgba(212, 175, 55, 0.75) 50%,
-        rgba(76, 122, 119, 0.8) 100%
+        rgba(76, 122, 119, 0.75) 0%,
+        rgba(139, 115, 85, 0.7) 25%,
+        rgba(212, 175, 55, 0.65) 50%,
+        rgba(139, 115, 85, 0.7) 75%,
+        rgba(76, 122, 119, 0.75) 100%
     );
     backdrop-filter: blur(2px);
 }
@@ -5505,28 +5558,41 @@ a {
 .web-testimonials-section .section-title {
     color: #FFFFFF;
     text-shadow: 
-        2px 2px 6px rgba(44, 24, 16, 0.7),
-        0 0 20px rgba(212, 175, 55, 0.5);
+        3px 3px 10px rgba(44, 24, 16, 0.9),
+        0 0 30px rgba(212, 175, 55, 0.7),
+        0 0 50px rgba(76, 122, 119, 0.5);
     font-family: var(--font-vintage-serif);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 .web-testimonials-section .section-description {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.98);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    font-weight: 600;
 }
 
-/* Context-aware testimonial cards on art deco background */
+/* Enhanced testimonial cards on art deco background */
 .web-testimonials-section .testimonial-card {
-    background: rgba(245, 236, 217, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(245, 236, 217, 0.97);
+    backdrop-filter: blur(20px);
     box-shadow: 
-        0 8px 32px rgba(44, 24, 16, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        0 15px 50px rgba(44, 24, 16, 0.4),
+        0 0 0 3px rgba(212, 175, 55, 0.5),
+        inset 0 2px 8px rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(212, 175, 55, 0.4);
+}
+
+.web-testimonials-section .testimonial-card.active {
+    box-shadow: 
+        0 20px 70px rgba(212, 175, 55, 0.6),
+        0 0 0 4px rgba(212, 175, 55, 0.6),
+        0 0 80px rgba(76, 122, 119, 0.4),
+        inset 0 2px 12px rgba(255, 255, 255, 0.8);
 }
 
 .web-testimonials-section .testimonial-text {
     color: var(--text-primary);
+    font-weight: 500;
 }
 
 .web-testimonials-section .quote-icon {
@@ -5541,19 +5607,21 @@ a {
 }
 
 .web-resource-bg {
-    /* Square isometric digital art - modern with vintage texture */
-    filter: sepia(0.25) contrast(1.1) brightness(0.8) saturate(1.15);
+    /* Enhanced isometric digital art */
+    filter: sepia(0.2) contrast(1.2) brightness(0.85) saturate(1.3);
+    transform: scale(1.07);
 }
 
 .web-resource-section .section-overlay {
-    /* Purple/blue gradient overlay matching browser window theme */
+    /* Vibrant purple/blue gradient */
     background: linear-gradient(
         135deg,
-        rgba(102, 126, 234, 0.8) 0%,
-        rgba(167, 139, 250, 0.75) 50%,
-        rgba(96, 165, 250, 0.8) 100%
+        rgba(102, 126, 234, 0.75) 0%,
+        rgba(167, 139, 250, 0.65) 30%,
+        rgba(96, 165, 250, 0.7) 70%,
+        rgba(102, 126, 234, 0.75) 100%
     );
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1.5px);
 }
 
 .web-resource-section .container {
@@ -5561,24 +5629,36 @@ a {
     z-index: 2;
 }
 
-/* Context-aware resource spotlight styling */
+/* Enhanced resource spotlight styling */
 .web-resource-section .resource-spotlight {
-    background: rgba(245, 236, 217, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(245, 236, 217, 0.98);
+    backdrop-filter: blur(25px);
     box-shadow: 
-        0 16px 48px rgba(102, 126, 234, 0.4),
-        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+        0 20px 80px rgba(102, 126, 234, 0.6),
+        0 0 0 4px rgba(167, 139, 250, 0.4),
+        0 0 100px rgba(96, 165, 250, 0.3),
+        inset 0 3px 8px rgba(255, 255, 255, 0.7);
+    border: 3px solid rgba(167, 139, 250, 0.3);
+}
+
+.web-resource-section .resource-spotlight:hover {
+    box-shadow: 
+        0 25px 100px rgba(102, 126, 234, 0.7),
+        0 0 0 5px rgba(167, 139, 250, 0.5),
+        0 0 120px rgba(96, 165, 250, 0.5),
+        inset 0 4px 12px rgba(255, 255, 255, 0.9);
 }
 
 .web-resource-section .resource-badge {
     background: var(--aged-brass);
     color: var(--mahogany);
-    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.6);
+    border: 2px solid rgba(212, 175, 55, 0.5);
 }
 
 .web-resource-section .resource-content h2 {
     color: var(--mahogany);
-    text-shadow: 0 1px 2px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 2px 6px rgba(212, 175, 55, 0.4);
 }
 
 /* Vintage grain texture overlay for all section images */
@@ -5597,7 +5677,7 @@ a {
             rgba(0, 0, 0, 0.03) 2px, 
             rgba(0, 0, 0, 0.03) 4px
         );
-    opacity: 0.4;
+    opacity: 0.3;
     pointer-events: none;
     z-index: 2;
     mix-blend-mode: overlay;
@@ -5614,11 +5694,11 @@ a {
                 rgba(0, 0, 0, 0.03) 4px, 
                 rgba(0, 0, 0, 0.03) 8px
             );
-        opacity: 0.5;
+        opacity: 0.25;
     }
 }
 
-/* Parallax effect on scroll for section images */
+/* Enhanced parallax effect on scroll for section images */
 @media (prefers-reduced-motion: no-preference) {
     .section-background-image img {
         transform: scale(1.1);
@@ -5629,16 +5709,16 @@ a {
     .web-projects-section .section-background-image img,
     .web-testimonials-section .section-background-image img,
     .web-resource-section .section-background-image img {
-        animation: subtleParallax 20s ease-in-out infinite;
+        animation: enhancedParallax 25s ease-in-out infinite;
     }
 }
 
-@keyframes subtleParallax {
+@keyframes enhancedParallax {
     0%, 100% {
         transform: scale(1.1) translateY(0);
     }
     50% {
-        transform: scale(1.1) translateY(-10px);
+        transform: scale(1.12) translateY(-15px) translateX(5px);
     }
 }
 
@@ -5653,20 +5733,30 @@ a {
     
     .section-background-image img {
         object-position: center;
+        transform: scale(1.05);
+    }
+    
+    .web-showcase-section .showcase-card:hover,
+    .web-projects-section .saga-card:hover {
+        transform: translateY(-8px) scale(1.02);
     }
 }
 
 @media (max-width: 640px) {
     .web-showcase-section .section-overlay {
-        background: rgba(102, 126, 234, 0.85);
+        background: rgba(102, 126, 234, 0.8);
     }
     
     .web-testimonials-section .section-overlay {
-        background: rgba(76, 122, 119, 0.9);
+        background: rgba(76, 122, 119, 0.85);
     }
     
     .web-resource-section .section-overlay {
-        background: rgba(102, 126, 234, 0.85);
+        background: rgba(102, 126, 234, 0.8);
+    }
+    
+    .section-background-image img {
+        transform: scale(1.02);
     }
 }
 
