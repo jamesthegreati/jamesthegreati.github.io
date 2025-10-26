@@ -98,6 +98,18 @@
     --spacing-lg: 4rem;
     --spacing-xl: 6rem;
     
+    /* Image Filters */
+    --filter-vintage-sepia: sepia(0.25);
+    --filter-vintage-brightness: brightness(0.95);
+    --filter-hero-brightness: brightness(0.4);
+    --filter-hero-sepia: sepia(0.3);
+    --filter-workspace-sepia: sepia(0.3);
+    --filter-workspace-contrast: contrast(1.1);
+    
+    /* Overlay Colors */
+    --overlay-hero-start: rgba(212, 175, 55, 0.15);
+    --overlay-hero-end: rgba(76, 122, 119, 0.15);
+    
     /* Transitions - Easing Functions */
     --ease-expo-out: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-quad-inout: cubic-bezier(0.45, 0, 0.55, 1);
@@ -4947,4 +4959,374 @@ a {
 
 .hover-grow:hover {
     transform: scale(1.05);
+}
+
+/* ===== Hero Background Image ===== */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.hero-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: var(--filter-hero-brightness) var(--filter-hero-sepia);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--overlay-hero-start), var(--overlay-hero-end));
+    mix-blend-mode: multiply;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Vision Scoper Button - Ship Wheel ===== */
+.vision-scoper-btn .wheel-icon {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1);
+    animation: rotate-wheel 20s linear infinite;
+}
+
+@keyframes rotate-wheel {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.vision-scoper-btn:hover .wheel-icon {
+    animation: rotate-wheel 3s linear infinite;
+}
+
+/* ===== About Section Images ===== */
+.about-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    filter: var(--filter-vintage-sepia) var(--filter-vintage-brightness);
+}
+
+.about-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.workspace-photo {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    filter: var(--filter-workspace-sepia) var(--filter-workspace-contrast);
+    transition: transform var(--transition-base);
+}
+
+.workspace-photo:hover {
+    transform: scale(1.05);
+    filter: var(--filter-vintage-sepia) contrast(1.05);
+}
+
+/* ===== World-Specific Combined About & Contact Sections ===== */
+.world-about-contact {
+    padding: var(--spacing-lg) 0;
+    background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+    position: relative;
+    overflow: hidden;
+}
+
+.world-about-contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--aged-brass), transparent);
+    opacity: 0.3;
+}
+
+.compact-about-contact {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.compact-about {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.about-compact-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.about-image-compact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.compact-img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    filter: sepia(0.25) brightness(0.95);
+    transition: all var(--transition-base);
+}
+
+.compact-img:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: var(--shadow-lg);
+}
+
+.about-text-compact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.about-text-compact p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.compact-stats {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.stat-compact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-sm);
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-color);
+    min-width: 140px;
+    transition: all var(--transition-base);
+}
+
+.stat-compact:hover {
+    transform: translateY(-4px);
+    border-color: var(--aged-brass);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-number-compact {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--aged-brass);
+    font-family: var(--font-vintage-serif);
+}
+
+.stat-label-compact {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* Compact Contact Section */
+.compact-contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.compact-title {
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    font-family: var(--font-vintage-serif);
+    margin-bottom: 0.5rem;
+}
+
+.compact-description {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.contact-compact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.contact-methods-compact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.contact-method-compact {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all var(--transition-base);
+}
+
+.contact-method-compact:hover {
+    background: var(--aged-brass);
+    color: var(--bg-primary);
+    transform: translateX(5px);
+    box-shadow: var(--shadow-sm);
+}
+
+.method-icon {
+    font-size: 1.5rem;
+}
+
+.method-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.quick-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.compact-input {
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all var(--transition-base);
+}
+
+.compact-input:focus {
+    outline: none;
+    border-color: var(--aged-brass);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.btn-compact {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.95rem;
+    margin-top: var(--spacing-sm);
+}
+
+/* Smooth Transitions Based on Active World */
+.world[data-world="web"] .world-about-contact {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+}
+
+.world[data-world="cloud"] .world-about-contact {
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.05), rgba(0, 242, 254, 0.05));
+}
+
+.world[data-world="ai"] .world-about-contact {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.05), rgba(255, 0, 110, 0.05));
+}
+
+/* World transition animations */
+.world {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.world.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.world-section {
+    transition: all 0.4s ease;
+}
+
+/* Responsive Design for Compact Sections */
+@media (max-width: 968px) {
+    .about-compact-grid,
+    .contact-compact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .compact-img {
+        max-width: 200px;
+    }
+    
+    .stat-compact {
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 640px) {
+    .compact-stats {
+        justify-content: center;
+    }
+    
+    .world-about-contact {
+        padding: var(--spacing-md) 0;
+    }
+    
+    .compact-about-contact {
+        gap: var(--spacing-md);
+    }
+    
+    .about-text-compact p {
+        font-size: 1rem;
+    }
+    
+    .stat-number-compact {
+        font-size: 1.5rem;
+    }
+}
+
+/* Enhanced image loading animations */
+@keyframes fadeInImage {
+    from {
+        opacity: 0;
+        filter: blur(10px) sepia(0.5);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0) sepia(0.25);
+    }
+}
+
+.compact-img,
+.about-image,
+.workspace-photo {
+    animation: fadeInImage 0.8s ease-out;
 }
