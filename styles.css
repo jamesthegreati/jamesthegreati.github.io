@@ -4990,7 +4990,7 @@ a {
     opacity: 0.7;
     filter: sepia(0.4) contrast(1.15) brightness(0.9);
     mix-blend-mode: multiply;
-    animation: float 8s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
     pointer-events: none;
     z-index: 0;
     /* Vintage vignette effect */
@@ -5603,10 +5603,26 @@ a {
     mix-blend-mode: overlay;
 }
 
+/* Reduce grain complexity on mobile for better performance */
+@media (max-width: 640px) {
+    .section-background-image::after {
+        background-image: 
+            repeating-linear-gradient(
+                0deg, 
+                transparent, 
+                transparent 4px, 
+                rgba(0, 0, 0, 0.03) 4px, 
+                rgba(0, 0, 0, 0.03) 8px
+            );
+        opacity: 0.5;
+    }
+}
+
 /* Parallax effect on scroll for section images */
 @media (prefers-reduced-motion: no-preference) {
     .section-background-image img {
         transform: scale(1.1);
+        will-change: transform;
     }
     
     .web-showcase-section .section-background-image img,
@@ -5641,10 +5657,6 @@ a {
 }
 
 @media (max-width: 640px) {
-    .section-background-image::after {
-        opacity: 0.5;
-    }
-    
     .web-showcase-section .section-overlay {
         background: rgba(102, 126, 234, 0.85);
     }
