@@ -4979,6 +4979,40 @@ a {
     filter: var(--filter-hero-brightness) var(--filter-hero-sepia);
 }
 
+/* Hero Accent Image - Strategic Placement */
+.hero-accent-image {
+    position: absolute;
+    right: 5%;
+    bottom: 10%;
+    width: 400px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.7;
+    filter: sepia(0.4) contrast(1.15) brightness(0.9);
+    mix-blend-mode: multiply;
+    animation: float 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+    /* Vintage vignette effect */
+    box-shadow: inset 0 0 100px rgba(44, 24, 16, 0.3);
+}
+
+@media (max-width: 968px) {
+    .hero-accent-image {
+        width: 280px;
+        right: 2%;
+        bottom: 5%;
+        opacity: 0.5;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero-accent-image {
+        width: 200px;
+        opacity: 0.4;
+    }
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -5330,3 +5364,297 @@ a {
 .workspace-photo {
     animation: fadeInImage 0.8s ease-out;
 }
+
+/* ===== Section Background Images - Context-Aware Styling ===== */
+.section-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.section-background-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.section-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Web Showcase Section - Web Developer Workspace Image */
+.web-showcase-section {
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-xl) 0;
+}
+
+.web-workspace-bg {
+    /* Anime-style image - lighter, more vibrant */
+    filter: sepia(0.2) contrast(1.1) brightness(0.85) saturate(1.1);
+}
+
+.web-showcase-section .section-overlay {
+    /* Darker overlay for better text contrast on bright anime-style image */
+    background: linear-gradient(
+        135deg, 
+        rgba(102, 126, 234, 0.75) 0%, 
+        rgba(118, 75, 162, 0.7) 50%,
+        rgba(102, 126, 234, 0.75) 100%
+    );
+    backdrop-filter: blur(2px);
+}
+
+.web-showcase-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.web-showcase-section .section-title {
+    color: #FFFFFF;
+    text-shadow: 
+        2px 2px 8px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(102, 126, 234, 0.4);
+    font-family: var(--font-retro-display);
+}
+
+.web-showcase-section .section-description {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+}
+
+/* Web Projects Section - Code Coming to Life Image */
+.web-projects-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.web-projects-bg {
+    /* Magical anime-style image with vibrant colors */
+    filter: sepia(0.15) contrast(1.15) brightness(0.8) saturate(1.2);
+}
+
+.web-projects-section .section-overlay {
+    /* Gradient overlay that complements the magical theme */
+    background: linear-gradient(
+        180deg,
+        rgba(245, 236, 217, 0.85) 0%,
+        rgba(240, 229, 206, 0.9) 50%,
+        rgba(245, 236, 217, 0.85) 100%
+    );
+    backdrop-filter: blur(1px);
+}
+
+.web-projects-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.web-projects-section .section-title {
+    color: var(--mahogany);
+    text-shadow: 
+        1px 1px 3px rgba(255, 255, 255, 0.6),
+        0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.web-projects-section .section-description {
+    color: var(--vintage-brown);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Web Testimonials Section - Creative Web Design Studio Image */
+.web-testimonials-section {
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-xl) 0;
+}
+
+.web-testimonials-bg {
+    /* Art deco style portrait image - elegant and refined */
+    filter: sepia(0.35) contrast(1.1) brightness(0.75);
+}
+
+.web-testimonials-section .section-overlay {
+    /* Teal/gold overlay matching art deco palette */
+    background: linear-gradient(
+        135deg,
+        rgba(76, 122, 119, 0.8) 0%,
+        rgba(212, 175, 55, 0.75) 50%,
+        rgba(76, 122, 119, 0.8) 100%
+    );
+    backdrop-filter: blur(2px);
+}
+
+.web-testimonials-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.web-testimonials-section .section-title {
+    color: #FFFFFF;
+    text-shadow: 
+        2px 2px 6px rgba(44, 24, 16, 0.7),
+        0 0 20px rgba(212, 175, 55, 0.5);
+    font-family: var(--font-vintage-serif);
+    letter-spacing: 2px;
+}
+
+.web-testimonials-section .section-description {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Context-aware testimonial cards on art deco background */
+.web-testimonials-section .testimonial-card {
+    background: rgba(245, 236, 217, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 8px 32px rgba(44, 24, 16, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.web-testimonials-section .testimonial-text {
+    color: var(--text-primary);
+}
+
+.web-testimonials-section .quote-icon {
+    color: var(--aged-brass);
+}
+
+/* Web Resource Section - Browser Window Universe Image */
+.web-resource-section {
+    position: relative;
+    overflow: hidden;
+    padding: var(--spacing-xl) 0;
+}
+
+.web-resource-bg {
+    /* Square isometric digital art - modern with vintage texture */
+    filter: sepia(0.25) contrast(1.1) brightness(0.8) saturate(1.15);
+}
+
+.web-resource-section .section-overlay {
+    /* Purple/blue gradient overlay matching browser window theme */
+    background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.8) 0%,
+        rgba(167, 139, 250, 0.75) 50%,
+        rgba(96, 165, 250, 0.8) 100%
+    );
+    backdrop-filter: blur(2px);
+}
+
+.web-resource-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Context-aware resource spotlight styling */
+.web-resource-section .resource-spotlight {
+    background: rgba(245, 236, 217, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 16px 48px rgba(102, 126, 234, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.web-resource-section .resource-badge {
+    background: var(--aged-brass);
+    color: var(--mahogany);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+}
+
+.web-resource-section .resource-content h2 {
+    color: var(--mahogany);
+    text-shadow: 0 1px 2px rgba(212, 175, 55, 0.3);
+}
+
+/* Vintage grain texture overlay for all section images */
+.section-background-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(
+            0deg, 
+            transparent, 
+            transparent 2px, 
+            rgba(0, 0, 0, 0.03) 2px, 
+            rgba(0, 0, 0, 0.03) 4px
+        );
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+}
+
+/* Parallax effect on scroll for section images */
+@media (prefers-reduced-motion: no-preference) {
+    .section-background-image img {
+        transform: scale(1.1);
+    }
+    
+    .web-showcase-section .section-background-image img,
+    .web-projects-section .section-background-image img,
+    .web-testimonials-section .section-background-image img,
+    .web-resource-section .section-background-image img {
+        animation: subtleParallax 20s ease-in-out infinite;
+    }
+}
+
+@keyframes subtleParallax {
+    0%, 100% {
+        transform: scale(1.1) translateY(0);
+    }
+    50% {
+        transform: scale(1.1) translateY(-10px);
+    }
+}
+
+/* Responsive adjustments for section backgrounds */
+@media (max-width: 968px) {
+    .web-showcase-section .section-overlay,
+    .web-projects-section .section-overlay,
+    .web-testimonials-section .section-overlay,
+    .web-resource-section .section-overlay {
+        backdrop-filter: blur(3px);
+    }
+    
+    .section-background-image img {
+        object-position: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .section-background-image::after {
+        opacity: 0.5;
+    }
+    
+    .web-showcase-section .section-overlay {
+        background: rgba(102, 126, 234, 0.85);
+    }
+    
+    .web-testimonials-section .section-overlay {
+        background: rgba(76, 122, 119, 0.9);
+    }
+    
+    .web-resource-section .section-overlay {
+        background: rgba(102, 126, 234, 0.85);
+    }
+}
+
