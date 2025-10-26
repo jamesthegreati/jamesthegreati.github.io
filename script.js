@@ -1048,4 +1048,192 @@ if (contactForm) {
     });
 }
 
+// ===== Vintage Carousel =====
+// The "Chart Your Course" button now opens the vintage carousel instead of the Vision Scoper modal
+// This provides a more immersive, atlas-style navigation experience
+const vintageCarouselModal = document.getElementById('vintage-carousel-modal');
+const carouselSlides = document.querySelectorAll('.carousel-slide');
+const carouselPrev = document.querySelector('.carousel-prev');
+const carouselNext = document.querySelector('.carousel-next');
+const carouselIndicators = document.querySelectorAll('.indicator');
+const carouselModalClose = document.querySelector('.carousel-modal-close');
+const carouselOverlay = document.querySelector('.carousel-overlay');
+
+let currentSlide = 0;
+let touchStartX = 0;
+let touchEndX = 0;
+
+// Open carousel when Vision Scoper button is clicked
+if (visionScoperBtn && vintageCarouselModal) {
+    visionScoperBtn.addEventListener('click', (e) => {
+        // Instead of opening the scoper modal, open the carousel
+        e.stopPropagation();
+        openVintageCarousel();
+    });
+}
+
+function openVintageCarousel() {
+    sounds.whoosh();
+    vintageCarouselModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    showSlide(0);
+}
+
+function closeVintageCarousel() {
+    sounds.click();
+    vintageCarouselModal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+if (carouselModalClose) {
+    carouselModalClose.addEventListener('click', closeVintageCarousel);
+}
+
+if (carouselOverlay) {
+    carouselOverlay.addEventListener('click', closeVintageCarousel);
+}
+
+function showSlide(index) {
+    // Ensure index is within bounds
+    currentSlide = ((index % carouselSlides.length) + carouselSlides.length) % carouselSlides.length;
+    
+    carouselSlides.forEach((slide, i) => {
+        slide.classList.remove('active', 'prev', 'turning-out', 'turning-in');
+        
+        if (i === currentSlide) {
+            slide.classList.add('active');
+        } else if (i < currentSlide) {
+            slide.classList.add('prev');
+        }
+    });
+    
+    // Update indicators
+    carouselIndicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === currentSlide);
+    });
+}
+
+function nextSlide() {
+    sounds.click();
+    
+    const current = carouselSlides[currentSlide];
+    current.classList.add('turning-out');
+    
+    setTimeout(() => {
+        showSlide(currentSlide + 1);
+        const next = carouselSlides[currentSlide];
+        next.classList.add('turning-in');
+        
+        setTimeout(() => {
+            next.classList.remove('turning-in');
+        }, 800);
+    }, 400);
+}
+
+function prevSlide() {
+    sounds.click();
+    
+    const current = carouselSlides[currentSlide];
+    current.classList.add('turning-out');
+    
+    setTimeout(() => {
+        showSlide(currentSlide - 1);
+        const prev = carouselSlides[currentSlide];
+        prev.classList.add('turning-in');
+        
+        setTimeout(() => {
+            prev.classList.remove('turning-in');
+        }, 800);
+    }, 400);
+}
+
+if (carouselNext) {
+    carouselNext.addEventListener('click', nextSlide);
+}
+
+if (carouselPrev) {
+    carouselPrev.addEventListener('click', prevSlide);
+}
+
+// Indicator clicks
+carouselIndicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+        sounds.click();
+        showSlide(index);
+    });
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (!vintageCarouselModal.classList.contains('active')) return;
+    
+    if (e.key === 'ArrowRight') {
+        nextSlide();
+    } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+    } else if (e.key === 'Escape') {
+        closeVintageCarousel();
+    }
+});
+
+// Touch swipe support
+const carouselContainer = document.querySelector('.vintage-carousel-container');
+if (carouselContainer) {
+    carouselContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    carouselContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+}
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swipe left - next slide
+            nextSlide();
+        } else {
+            // Swipe right - previous slide
+            prevSlide();
+        }
+    }
+}
+
+// Slide click navigation
+carouselSlides.forEach((slide) => {
+    slide.addEventListener('click', () => {
+        const target = slide.dataset.target;
+        if (target) {
+            closeVintageCarousel();
+            
+            setTimeout(() => {
+                if (target === 'home') {
+                    // Navigate to home
+                    if (worldHub) worldHub.style.display = 'block';
+                    worlds.forEach(w => {
+                        w.classList.remove('active');
+                        w.style.display = 'none';
+                    });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else if (target.includes('world')) {
+                    // Navigate to specific world
+                    const worldName = target.replace('-world', '');
+                    activateWorld(worldName);
+                } else {
+                    // Navigate to section
+                    const section = document.getElementById(target);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }, 300);
+        }
+    });
+});
+
 console.log('%c✨ Magnetic Portfolio Experience Active ✨', 'font-size: 20px; font-weight: bold; color: #A78BFA;');
