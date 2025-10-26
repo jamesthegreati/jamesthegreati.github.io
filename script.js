@@ -1049,6 +1049,8 @@ if (contactForm) {
 }
 
 // ===== Vintage Carousel =====
+// The "Chart Your Course" button now opens the vintage carousel instead of the Vision Scoper modal
+// This provides a more immersive, atlas-style navigation experience
 const vintageCarouselModal = document.getElementById('vintage-carousel-modal');
 const carouselSlides = document.querySelectorAll('.carousel-slide');
 const carouselPrev = document.querySelector('.carousel-prev');

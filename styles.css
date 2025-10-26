@@ -31,7 +31,7 @@
     --text-muted: #6B5D52;
     --text-dimmed: #8B7D72;
     
-    /* Legacy Dark Colors (kept for compatibility) */
+    /* Legacy Dark Colors (kept for backward compatibility with existing world sections) */
     --midnight-blue: #0f1419;
     --midnight-blue-light: #1a1f2e;
     --midnight-blue-lighter: #2d3748;
