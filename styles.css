@@ -5694,7 +5694,7 @@ a {
                 rgba(0, 0, 0, 0.03) 4px, 
                 rgba(0, 0, 0, 0.03) 8px
             );
-        opacity: 0.5;
+        opacity: 0.25;
     }
 }
 
@@ -5717,13 +5717,7 @@ a {
     0%, 100% {
         transform: scale(1.1) translateY(0);
     }
-    25% {
-        transform: scale(1.12) translateY(-15px) translateX(5px);
-    }
     50% {
-        transform: scale(1.1) translateY(-8px) translateX(-5px);
-    }
-    75% {
         transform: scale(1.12) translateY(-15px) translateX(5px);
     }
 }
