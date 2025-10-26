@@ -57,7 +57,7 @@ function activateWorld(worldName) {
     sounds.whoosh();
     currentWorld = worldName;
     
-    // Add portal burst animation
+    // Create world-specific transition overlay
     const portalOverlay = document.createElement('div');
     portalOverlay.className = 'portal-transition-overlay';
     portalOverlay.style.cssText = `
@@ -70,15 +70,20 @@ function activateWorld(worldName) {
         pointer-events: none;
     `;
     
-    // World-specific colors
-    const colors = {
-        web: 'rgba(96, 165, 250, 0.8)',
-        cloud: 'rgba(52, 211, 153, 0.8)',
-        ai: 'rgba(167, 139, 250, 0.8)'
-    };
-    
-    portalOverlay.style.background = `radial-gradient(circle at center, ${colors[worldName]}, transparent)`;
-    portalOverlay.style.animation = 'portalBurst 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards';
+    // World-specific transition effects
+    if (worldName === 'web') {
+        // 90s pixel dissolve effect
+        portalOverlay.style.background = 'repeating-conic-gradient(#0000FF 0% 25%, #C0C0C0 0% 50%) 50% / 20px 20px';
+        portalOverlay.style.animation = 'pixelDissolve 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards';
+    } else if (worldName === 'cloud') {
+        // 70s blueprint wipe
+        portalOverlay.style.background = 'linear-gradient(90deg, #0D1B2A 0%, transparent 100%)';
+        portalOverlay.style.animation = 'blueprintWipe 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards';
+    } else if (worldName === 'ai') {
+        // 80s neon flash
+        portalOverlay.style.background = 'radial-gradient(circle, #FF006E, #00F5FF, #9D4EDD)';
+        portalOverlay.style.animation = 'neonFlash 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards';
+    }
     
     document.body.appendChild(portalOverlay);
     
