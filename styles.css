@@ -2772,6 +2772,13 @@ a {
     transform: perspective(500px) rotateX(60deg);
     transform-origin: bottom;
     pointer-events: none;
+    will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ai-world .world-hero::before {
+        transform: none;
+    }
 }
 
 /* Neon Sun/Circle */
@@ -2805,6 +2812,16 @@ a {
         0 0 80px var(--ai-80s-neon-pink),
         0 0 120px var(--ai-80s-neon-purple);
     animation: neonFlicker 3s infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ai-world .world-title {
+        animation: none;
+        text-shadow: 
+            0 0 10px var(--ai-80s-neon-blue),
+            0 0 20px var(--ai-80s-neon-blue),
+            0 0 40px var(--ai-80s-neon-pink);
+    }
 }
 
 @keyframes neonFlicker {
@@ -2913,6 +2930,14 @@ a {
     );
     pointer-events: none;
     animation: crtScanline 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ai-world .chatbot-demo::before,
+    .ai-world .sentiment-demo::before,
+    .ai-world .viz-demo::before {
+        animation: none;
+    }
 }
 
 @keyframes crtScanline {
