@@ -164,7 +164,7 @@ npm install
 npm run build
 cd out
 python3 -m http.server 8080
-# Visit http://localhost:3000
+# Visit http://localhost:8080
 ```
 
 ### Alternative Deployment
