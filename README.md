@@ -2,6 +2,12 @@
 
 A stunning, immersive vintage-themed portfolio showcasing expertise in Web Design, Cloud Engineering, and AI. Each service is presented as a distinct "world" with its own aesthetic and interactive experience.
 
+## 🚀 Getting Site Live at jamesdesign.me
+
+**Getting a 404 error?** See [QUICK_START.md](QUICK_START.md) for a 3-step fix (takes ~15 minutes).
+
+**Already working?** Great! The site auto-deploys when you push to `main`.
+
 ## Features
 
 ### 🎨 Three Unique Worlds
