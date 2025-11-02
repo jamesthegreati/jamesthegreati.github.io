@@ -128,13 +128,46 @@ Update project content in each world component:
 
 ## Deployment
 
-Deploy to Vercel with a single click:
+This site is configured to deploy to **GitHub Pages** with the custom domain **jamesdesign.me**.
+
+### Automated Deployment
+
+The site deploys automatically via GitHub Actions when you push to the `main` branch.
+
+### Setup Instructions
+
+1. **Configure DNS** at your domain registrar (see [DEPLOYMENT_INSTRUCTIONS.md](DEPLOYMENT_INSTRUCTIONS.md))
+2. **Enable GitHub Pages** in repository settings (Settings → Pages)
+3. **Set Source** to "GitHub Actions"
+4. **Add Custom Domain**: `jamesdesign.me`
+
+### Troubleshooting
+
+If you're seeing a 404 error at jamesdesign.me:
+
+1. Run the diagnostic script: `./check-deployment.sh`
+2. See detailed guide: [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+3. Follow the steps in [DEPLOYMENT_INSTRUCTIONS.md](DEPLOYMENT_INSTRUCTIONS.md)
+
+### Local Static Build
+
+To test the static build locally:
+
+```bash
+npm install
+npm run build
+cd out
+python3 -m http.server 8080
+# Visit http://localhost:3000
+```
+
+### Alternative Deployment
+
+You can also deploy to Vercel or any Node.js hosting provider:
 
 ```bash
 vercel
 ```
-
-Or deploy to any Node.js hosting provider.
 
 ## Browser Support
 
