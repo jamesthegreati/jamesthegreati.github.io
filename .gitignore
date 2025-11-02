@@ -1,0 +1,13 @@
+node_modules
+.next
+.env
+.DS_Store
+.vercel
+dist
+build
+*.log
+.idea
+.vscode
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*

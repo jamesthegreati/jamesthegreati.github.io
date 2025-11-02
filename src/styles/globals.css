@@ -1,0 +1,642 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bigelow+Rules&family=Lato:wght@400;700&family=Source+Sans+Pro:wght@400;600;700&family=Playfair+Display:wght@400;700;900&family=Special+Elite&family=Merriweather:wght@300;400;700&family=Cinzel:wght@400;600;900&family=Permanent+Marker&family=Koulen&family=Righteous&family=Fredericka+the+Great&display=swap');
+
+/* Root Variables */
+:root {
+  --color-web-cream: #F5F1DE;
+  --color-web-mustard: #D4A574;
+  --color-web-navy: #1A3A52;
+  --color-web-coral: #E8897B;
+  --color-web-sage: #7A9D7F;
+
+  --color-cloud-charcoal: #2C3E50;
+  --color-cloud-silver: #BDC3C7;
+  --color-cloud-electric: #3498DB;
+  --color-cloud-copper: #B87333;
+  --color-cloud-steel: #708090;
+
+  --color-ai-purple: #3D1A5C;
+  --color-ai-cyan: #00D9FF;
+  --color-ai-cream: #F0E6D2;
+  --color-ai-gold: #FFD700;
+  --color-ai-magenta: #FF006E;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.font-retro {
+  font-family: 'Bigelow Rules', cursive;
+}
+
+.font-vintage {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-typewriter {
+  font-family: 'Special Elite', cursive;
+}
+
+.font-elegant {
+  font-family: 'Cinzel', serif;
+}
+
+.font-serif {
+  font-family: 'Merriweather', serif;
+}
+
+.font-poster {
+  font-family: 'Koulen', cursive;
+}
+
+.font-marquee {
+  font-family: 'Righteous', cursive;
+}
+
+.font-carnival {
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.font-handwritten {
+  font-family: 'Permanent Marker', cursive;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-web-mustard);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-web-navy);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-web-mustard);
+  color: var(--color-web-navy);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(212, 165, 116, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(212, 165, 116, 0.6);
+  }
+}
+
+@keyframes neon-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
+  }
+}
+
+@keyframes matrix-rain {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes scan-lines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes film-roll {
+  0% {
+    transform: translateX(-100%) rotate(-2deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes film-roll-reverse {
+  0% {
+    transform: translateX(100%) rotate(2deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes projector-flicker {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.95;
+    filter: brightness(1.05);
+  }
+}
+
+@keyframes film-grain {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  10% {
+    background-position: -5% -10%;
+  }
+  20% {
+    background-position: -15% 5%;
+  }
+  30% {
+    background-position: 7% -25%;
+  }
+  40% {
+    background-position: -5% 25%;
+  }
+  50% {
+    background-position: -15% 10%;
+  }
+  60% {
+    background-position: 15% 0%;
+  }
+  70% {
+    background-position: 0% 15%;
+  }
+  80% {
+    background-position: 3% 35%;
+  }
+  90% {
+    background-position: -10% 10%;
+  }
+}
+
+@keyframes reel-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee-lights {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+  }
+  50% {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+}
+
+/* Utility Classes */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.neon-glow {
+  animation: neon-glow 2s ease-in-out infinite;
+}
+
+.scan-lines {
+  animation: scan-lines 8s linear infinite;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+.film-roll {
+  animation: film-roll 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.film-roll-reverse {
+  animation: film-roll-reverse 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.projector-flicker {
+  animation: projector-flicker 0.15s infinite;
+}
+
+.film-grain-animated {
+  animation: film-grain 0.5s steps(10) infinite;
+}
+
+.reel-spin {
+  animation: reel-spin 8s linear infinite;
+}
+
+.marquee-lights {
+  animation: marquee-lights 1.5s ease-in-out infinite;
+}
+
+/* Vintage Effects */
+.vintage-frame {
+  position: relative;
+  border: 8px solid;
+  border-color: #D4A574 #1A3A52 #1A3A52 #D4A574;
+  box-shadow: inset 0 0 0 3px #F5F1DE, inset 0 0 10px 3px rgba(0, 0, 0, 0.1);
+}
+
+.grain-overlay {
+  position: relative;
+}
+
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='2' /%3E%3C/filter%3E%3Crect width='400' height='400' fill='%23000000' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* Aged Paper Effect */
+.aged-paper {
+  background: linear-gradient(to bottom, #f4e9d9 0%, #e8d5b8 50%, #f4e9d9 100%);
+  position: relative;
+}
+
+.aged-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(139, 69, 19, 0.04) 0%, transparent 50%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.aged-paper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5' seed='3' /%3E%3C/filter%3E%3Crect width='400' height='400' fill='%238B4513' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity: 0.25;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Ink Splatter Decorations */
+.ink-splatter {
+  position: absolute;
+  background: radial-gradient(circle, rgba(26, 58, 82, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+/* Torn Paper Edge */
+.torn-edge {
+  position: relative;
+}
+
+.torn-edge::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: linear-gradient(to right, transparent 0%, #1A3A52 5%, transparent 10%, #1A3A52 15%, transparent 20%, #1A3A52 25%, transparent 30%, #1A3A52 35%, transparent 40%, #1A3A52 45%, transparent 50%, #1A3A52 55%, transparent 60%, #1A3A52 65%, transparent 70%, #1A3A52 75%, transparent 80%, #1A3A52 85%, transparent 90%, #1A3A52 95%, transparent 100%);
+  filter: blur(1px);
+  opacity: 0.15;
+}
+
+/* Vintage Ornament */
+.vintage-ornament {
+  display: inline-block;
+  font-size: 2rem;
+  color: #D4A574;
+  opacity: 0.6;
+}
+
+/* Stamp Effect */
+.vintage-stamp {
+  border: 3px solid;
+  border-image: repeating-linear-gradient(
+    45deg,
+    #1A3A52,
+    #1A3A52 5px,
+    transparent 5px,
+    transparent 10px
+  ) 10;
+  padding: 1rem;
+  background: rgba(212, 165, 116, 0.1);
+  transform: rotate(-5deg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Typewriter text effect */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.typewriter-text {
+  overflow: hidden;
+  border-right: 2px solid #1A3A52;
+  white-space: nowrap;
+  animation: typewriter 3s steps(40) 1s 1 normal both;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.875rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--color-web-mustard);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Film Strip Effect */
+.film-strip {
+  position: relative;
+}
+
+.film-strip::before,
+.film-strip::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  background: repeating-linear-gradient(
+    90deg,
+    #1A3A52 0px,
+    #1A3A52 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  left: 0;
+}
+
+.film-strip::before {
+  top: -25px;
+}
+
+.film-strip::after {
+  bottom: -25px;
+}
+
+/* Vintage Cinema Card */
+.cinema-card {
+  background: linear-gradient(135deg, #f4e9d9 0%, #e8d5b8 100%);
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.1),
+    0 8px 16px rgba(0,0,0,0.1),
+    inset 0 0 0 1px rgba(212, 165, 116, 0.3);
+  border: 3px solid #1A3A52;
+  position: relative;
+  overflow: hidden;
+}
+
+.cinema-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 2px
+    );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Projector Beam Effect */
+.projector-beam {
+  position: relative;
+  overflow: hidden;
+}
+
+.projector-beam::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  animation: projector-sweep 3s ease-in-out infinite;
+}
+
+@keyframes projector-sweep {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+/* Vintage Ticket Style */
+.vintage-ticket {
+  background: linear-gradient(to right, #f4e9d9 0%, #f4e9d9 10%, #e8d5b8 10%, #e8d5b8 90%, #f4e9d9 90%, #f4e9d9 100%);
+  border: 2px dashed #1A3A52;
+  position: relative;
+}
+
+.vintage-ticket::before,
+.vintage-ticket::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, transparent 50%, #f4e9d9 50%);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.vintage-ticket::before {
+  left: -10px;
+}
+
+.vintage-ticket::after {
+  right: -10px;
+}
+
+/* Film Reel Decoration */
+.film-reel {
+  width: 80px;
+  height: 80px;
+  border: 4px solid currentColor;
+  border-radius: 50%;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.film-reel::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.film-reel::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      currentColor 10deg,
+      transparent 20deg,
+      transparent 60deg,
+      currentColor 70deg,
+      transparent 80deg,
+      transparent 120deg,
+      currentColor 130deg,
+      transparent 140deg,
+      transparent 180deg,
+      currentColor 190deg,
+      transparent 200deg,
+      transparent 240deg,
+      currentColor 250deg,
+      transparent 260deg,
+      transparent 300deg,
+      currentColor 310deg,
+      transparent 320deg
+    );
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  a {
+    color: #0066cc;
+    text-decoration: underline;
+  }
+}
