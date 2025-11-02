@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - copilot/connect-jamesdesign-me
+      # Add feature branches here for testing before merging
   workflow_dispatch:
 
 permissions:
