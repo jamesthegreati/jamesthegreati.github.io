@@ -12,11 +12,12 @@ export default function RootLayout({
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Multi-World Portfolio - Web Designer, Cloud Engineer & AI Expert</title>
+        <title>James Mwenda - Full Stack Developer</title>
         <meta
           name="description"
           content="Immersive vintage-themed portfolio showcasing expertise in web design, cloud engineering, and AI"
         />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

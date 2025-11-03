@@ -114,7 +114,7 @@ export function DeveloperProfile() {
             {/* Profile Content */}
             <div className="md:col-span-2">
               <div className="mb-8">
-                <h3 className="text-5xl font-vintage text-[#1A3A52] mb-2">James Barnes</h3>
+                <h3 className="text-5xl font-vintage text-[#1A3A52] mb-2">James Mwenda</h3>
                 <p className="text-xl font-typewriter text-[#D4A574] mb-4">
                   Full Stack Developer • Cloud Architect • AI Enthusiast
                 </p>
@@ -149,7 +149,7 @@ export function DeveloperProfile() {
                 {activeTab === 'about' && (
                   <div className="space-y-4 font-serif text-[#1A3A52] leading-relaxed">
                     <p className="text-lg first-letter:text-5xl first-letter:font-vintage first-letter:float-left first-letter:mr-3 first-letter:text-[#D4A574]">
-                      Greetings, fellow traveler of the digital realm! I am James Barnes, a craftsman of code and architect of cloud kingdoms. With over six years of dedicated service in the art of software development, I have honed my skills across multiple domains of this ever-evolving technological landscape.
+                      Greetings, fellow traveler of the digital realm! I am James Mwenda, a craftsman of code and architect of cloud kingdoms. With over six years of dedicated service in the art of software development, I have honed my skills across multiple domains of this ever-evolving technological landscape.
                     </p>
                     <p className="text-lg">
                       My journey began in the vibrant world of web design, where I learned to blend aesthetics with functionality, creating digital experiences that captivate and inspire. As my expertise grew, I ventured into the vast expanse of cloud engineering, mastering the arts of scalable infrastructure and DevOps practices.
