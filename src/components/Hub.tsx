@@ -192,7 +192,7 @@ export function Hub() {
             >
               <span className="text-4xl">⚜️</span>
               <span className="text-3xl font-elegant text-[#1A3A52]">
-                James Barnes
+                James Mwenda
               </span>
             </motion.div>
           </Link>
@@ -307,7 +307,7 @@ export function Hub() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-vintage font-black leading-tight text-[#1A3A52] mb-6"
             >
-              James Barnes
+              James Mwenda
               <br />
               <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-typewriter text-[#D4A574]">
                 Digital Craftsman
@@ -708,7 +708,7 @@ export function Hub() {
               </div>
 
               <p className="text-lg text-[#f4e9d9] font-typewriter mt-8">
-                © 2024 James Barnes • Crafted with passion and precision
+                © 2024 James Mwenda • Crafted with passion and precision
               </p>
               
               <p className="text-sm text-[#D4A574]/70 font-typewriter">

@@ -37,12 +37,12 @@ function MobileNav({ theme, pathname }: { theme: string; pathname: string }) {
       initial={{ y: 60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] max-w-xl"
+      className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg"
       style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 0.5rem)' }}
       aria-label="Primary navigation"
     >
       <div
-        className="backdrop-blur-md rounded-2xl border-2 shadow-xl flex justify-between gap-1 px-2"
+        className="backdrop-blur-md rounded-2xl border-2 shadow-xl flex justify-around items-center gap-2 px-3 py-2"
         style={{ backgroundColor: `${s.bg}CC`, borderColor: s.border }}
       >
         {worlds.map((world) => {
@@ -50,21 +50,21 @@ function MobileNav({ theme, pathname }: { theme: string; pathname: string }) {
           return (
             <Link href={world.path} key={world.path} aria-label={world.name} className="flex-1">
               <motion.div
-                className="flex flex-col items-center justify-center px-3 py-2 min-w-[64px]"
+                className="flex flex-col items-center justify-center px-2 py-2 min-w-[60px]"
                 whileHover={{ y: -2, scale: 1.03 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="text-2xl" aria-hidden>
+                <span className="text-2xl mb-1" aria-hidden>
                   {world.icon}
                 </span>
                 <span
-                  className="text-[10px] font-typewriter tracking-wider"
+                  className="text-[10px] font-typewriter tracking-wider text-center leading-tight"
                   style={{ color: s.text, opacity: isActive ? 1 : 0.85 }}
                 >
                   {world.label}
                 </span>
                 <motion.div
-                  className="h-0.5 w-6 rounded-full mt-1"
+                  className="h-0.5 w-6 rounded-full mt-1.5"
                   style={{ backgroundColor: s.active, opacity: isActive ? 1 : 0 }}
                   animate={{ opacity: isActive ? 1 : 0 }}
                   transition={{ duration: 0.2 }}
