@@ -21,60 +21,201 @@ const getWorldTheme = (pathname: string) => {
   return 'hub';
 };
 
-// Mobile bottom navigation bar (shared across worlds, themed colors)
+// Mobile hamburger navigation (shared across worlds, themed colors)
 function MobileNav({ theme, pathname }: { theme: string; pathname: string }) {
-  const themeStyles: Record<string, { bg: string; border: string; text: string; active: string }> = {
-    hub:   { bg: '#1A3A52', border: '#D4A574', text: '#F5F1DE', active: '#D4A574' },
-    web:   { bg: '#1A3A52', border: '#D4A574', text: '#F5F1DE', active: '#D4A574' },
-    cloud: { bg: '#3E2723', border: '#8B6F47', text: '#F5F1DE', active: '#8B6F47' },
-    ai:    { bg: '#1C1C1C', border: '#8B6F47', text: '#F2EDDE', active: '#8B6F47' },
+  const [isOpen, setIsOpen] = useState(false);
+
+  const themeStyles: Record<string, { bg: string; border: string; text: string; active: string; accent: string }> = {
+    hub:   { bg: '#1A3A52', border: '#D4A574', text: '#F5F1DE', active: '#D4A574', accent: '#D4A574' },
+    web:   { bg: '#1A3A52', border: '#D4A574', text: '#F5F1DE', active: '#D4A574', accent: '#D4A574' },
+    cloud: { bg: '#3E2723', border: '#8B6F47', text: '#F5F1DE', active: '#8B6F47', accent: '#8B6F47' },
+    ai:    { bg: '#1C1C1C', border: '#8B6F47', text: '#F2EDDE', active: '#8B6F47', accent: '#8B6F47' },
   };
 
   const s = themeStyles[theme] ?? themeStyles.hub;
 
   return (
-    <motion.nav
-      initial={{ y: 60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4 }}
-      className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg"
-      style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 0.5rem)' }}
-      aria-label="Primary navigation"
-    >
-      <div
-        className="backdrop-blur-md rounded-2xl border-2 shadow-xl flex justify-around items-center gap-2 px-3 py-2"
-        style={{ backgroundColor: `${s.bg}CC`, borderColor: s.border }}
+    <>
+      {/* Hamburger Button */}
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.4, type: 'spring', stiffness: 260, damping: 20 }}
+        className="md:hidden fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full backdrop-blur-md border-2 shadow-2xl flex items-center justify-center"
+        style={{ 
+          backgroundColor: `${s.bg}F0`, 
+          borderColor: s.border,
+          paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 0px)'
+        }}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={isOpen}
       >
-        {worlds.map((world) => {
-          const isActive = pathname === world.path;
-          return (
-            <Link href={world.path} key={world.path} aria-label={world.name} className="flex-1">
-              <motion.div
-                className="flex flex-col items-center justify-center px-2 py-2 min-w-[60px]"
-                whileHover={{ y: -2, scale: 1.03 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="text-2xl mb-1" aria-hidden>
-                  {world.icon}
-                </span>
-                <span
-                  className="text-[10px] font-typewriter tracking-wider text-center leading-tight"
-                  style={{ color: s.text, opacity: isActive ? 1 : 0.85 }}
-                >
-                  {world.label}
-                </span>
+        <motion.div
+          animate={isOpen ? "open" : "closed"}
+          className="flex flex-col items-center justify-center gap-1.5"
+        >
+          {/* Hamburger lines */}
+          <motion.span
+            variants={{
+              closed: { rotate: 0, y: 0 },
+              open: { rotate: 45, y: 8 }
+            }}
+            className="w-6 h-0.5 rounded-full"
+            style={{ backgroundColor: s.accent }}
+          />
+          <motion.span
+            variants={{
+              closed: { opacity: 1 },
+              open: { opacity: 0 }
+            }}
+            className="w-6 h-0.5 rounded-full"
+            style={{ backgroundColor: s.accent }}
+          />
+          <motion.span
+            variants={{
+              closed: { rotate: 0, y: 0 },
+              open: { rotate: -45, y: -8 }
+            }}
+            className="w-6 h-0.5 rounded-full"
+            style={{ backgroundColor: s.accent }}
+          />
+        </motion.div>
+      </motion.button>
+
+      {/* Navigation Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
+              onClick={() => setIsOpen(false)}
+              aria-hidden="true"
+            />
+
+            {/* Menu Panel */}
+            <motion.nav
+              initial={{ x: '100%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '100%', opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="md:hidden fixed bottom-0 right-0 top-0 z-40 w-64 shadow-2xl"
+              style={{ 
+                backgroundColor: s.bg,
+                borderLeft: `3px solid ${s.border}`,
+                paddingBottom: 'max(env(safe-area-inset-bottom), 1rem)'
+              }}
+              aria-label="Primary navigation"
+            >
+              <div className="flex flex-col h-full pt-20 px-6 pb-6">
+                {/* Menu Title */}
                 <motion.div
-                  className="h-0.5 w-6 rounded-full mt-1.5"
-                  style={{ backgroundColor: s.active, opacity: isActive ? 1 : 0 }}
-                  animate={{ opacity: isActive ? 1 : 0 }}
-                  transition={{ duration: 0.2 }}
-                />
-              </motion.div>
-            </Link>
-          );
-        })}
-      </div>
-    </motion.nav>
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="mb-8 pb-4 border-b-2"
+                  style={{ borderColor: s.border }}
+                >
+                  <h2 
+                    className="text-xl font-vintage tracking-wider"
+                    style={{ color: s.accent }}
+                  >
+                    Navigate
+                  </h2>
+                  <p 
+                    className="text-xs font-typewriter mt-1"
+                    style={{ color: s.text, opacity: 0.7 }}
+                  >
+                    Choose Your World
+                  </p>
+                </motion.div>
+
+                {/* Navigation Links */}
+                <div className="flex-1 space-y-2">
+                  {worlds.map((world, index) => {
+                    const isActive = pathname === world.path;
+                    return (
+                      <motion.div
+                        key={world.path}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + index * 0.05 }}
+                      >
+                        <Link 
+                          href={world.path}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <motion.div
+                            className="flex items-center gap-4 px-4 py-3.5 rounded-lg border-2 transition-all"
+                            style={{
+                              backgroundColor: isActive ? `${s.accent}20` : 'transparent',
+                              borderColor: isActive ? s.accent : 'transparent',
+                            }}
+                            whileHover={{ 
+                              x: 5, 
+                              backgroundColor: `${s.accent}15`,
+                              borderColor: s.accent
+                            }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <span className="text-3xl" aria-hidden="true">
+                              {world.icon}
+                            </span>
+                            <div className="flex-1">
+                              <span
+                                className="block text-sm font-typewriter tracking-wider"
+                                style={{ color: s.text }}
+                              >
+                                {world.label}
+                              </span>
+                              <span
+                                className="block text-xs font-typewriter mt-0.5"
+                                style={{ color: s.text, opacity: 0.6 }}
+                              >
+                                {world.name}
+                              </span>
+                            </div>
+                            {isActive && (
+                              <motion.div
+                                layoutId="active-indicator"
+                                className="w-2 h-2 rounded-full"
+                                style={{ backgroundColor: s.accent }}
+                                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                              />
+                            )}
+                          </motion.div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* Footer decoration */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-center pt-4 border-t-2"
+                  style={{ borderColor: s.border }}
+                >
+                  <span 
+                    className="text-xs font-vintage tracking-widest"
+                    style={{ color: s.text, opacity: 0.5 }}
+                  >
+                    EST. 2018
+                  </span>
+                </motion.div>
+              </div>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
