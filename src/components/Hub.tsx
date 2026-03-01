@@ -1,11 +1,42 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { ProgressBar } from './ProgressBar';
 import { VintagePageWrapper } from './VintageEffects';
 import { DeveloperProfile } from './DeveloperProfile';
+
+const featuredGitHubProjects = [
+  {
+    name: 'F.U.N.D.I.',
+    description: 'Framework for Universal Node-based Design and Intelligence.',
+    stack: 'JavaScript',
+    type: 'Framework',
+    href: 'https://github.com/jamesthegreati/F.U.N.D.I.',
+  },
+  {
+    name: 'WishlistOps',
+    description: 'AI-powered Steam marketing automation that turns Git commits into launch-ready announcements.',
+    stack: 'Python',
+    type: 'Automation Platform',
+    href: 'https://github.com/jamesthegreati/WishlistOps',
+  },
+  {
+    name: 'universal-claude-router',
+    description: 'Routing layer for model orchestration workflows and developer tooling.',
+    stack: 'TypeScript',
+    type: 'Infrastructure',
+    href: 'https://github.com/jamesthegreati/universal-claude-router',
+  },
+  {
+    name: 'crewai_llama3_arduino',
+    description: 'CrewAI + Ollama + Llama3 collaboration for Arduino programming workflows.',
+    stack: 'AI + Hardware',
+    type: 'Experimental AI',
+    href: 'https://github.com/jamesthegreati/crewai_llama3_arduino',
+  },
+];
 
 interface PortalCardProps {
   worldName: string;
@@ -171,6 +202,8 @@ export function PortalCard({
 }
 
 export function Hub() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <VintagePageWrapper intensity="light">
   <ProgressBar />
@@ -610,7 +643,7 @@ export function Hub() {
                   href="/ai-expert"
                   color="#3D1A5C"
                   accentColor="#00D9FF"
-                  icon="�"
+                  icon="🧠"
                 />
                 </motion.div>
               </div>
@@ -625,6 +658,92 @@ export function Hub() {
                 borderBottom: '4px solid #1A3A52'
               }} />
             </div>
+        </div>
+
+        {/* Featured GitHub Projects */}
+        <div className="px-4 pb-20">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="mb-10 text-center"
+            >
+              <p className="font-typewriter text-sm tracking-[0.3em] text-[#1A3A52]/80 uppercase mb-4">
+                From GitHub Activity
+              </p>
+              <h3 className="text-4xl md:text-5xl font-vintage text-[#1A3A52] mb-4">
+                Featured Engineering Work
+              </h3>
+              <p className="max-w-3xl mx-auto text-lg text-[#1A3A52]/85 font-serif leading-relaxed">
+                A curated snapshot of active repositories from
+                <a
+                  href="https://github.com/jamesthegreati"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mx-1 font-bold text-[#1A3A52] underline decoration-[#D4A574] decoration-2 underline-offset-4 hover:text-[#D4A574] transition-colors"
+                >
+                  @jamesthegreati
+                </a>
+                with elegant motion-driven project reveals.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {featuredGitHubProjects.map((project, index) => (
+                <motion.a
+                  key={project.name}
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${project.name} repository on GitHub`}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: index * 0.12 }}
+                  whileHover={shouldReduceMotion ? undefined : { y: -8, scale: 1.01 }}
+                  className="group relative overflow-hidden rounded-2xl border-2 border-[#1A3A52]/20 bg-gradient-to-br from-[#f4e9d9] via-[#f9f2e3] to-[#efe1c9] p-6 shadow-lg transition-all"
+                >
+                  {!shouldReduceMotion && (
+                    <motion.div
+                      className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#D4A574]/20 blur-2xl"
+                      animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+                      transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  )}
+
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between gap-3 mb-3">
+                      <span className="inline-flex rounded-full bg-[#1A3A52] px-3 py-1 text-xs font-bold tracking-[0.16em] text-[#f4e9d9] uppercase">
+                        {project.type}
+                      </span>
+                      <span className="font-typewriter text-xs tracking-[0.2em] uppercase text-[#1A3A52]/70">{project.stack}</span>
+                    </div>
+
+                    <h4 className="text-2xl font-elegant text-[#1A3A52] mb-2">{project.name}</h4>
+
+                    <motion.p
+                      className="text-[#1A3A52]/85 font-serif leading-relaxed"
+                      initial={{ opacity: 0.84 }}
+                      whileHover={{ opacity: 1 }}
+                    >
+                      {project.description}
+                    </motion.p>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      whileHover={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="mt-4 flex justify-end"
+                    >
+                      <span className="font-marquee text-sm text-[#1A3A52]">Open Repository →</span>
+                    </motion.div>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Vintage Footer section */}
