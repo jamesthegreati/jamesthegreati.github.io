@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { ProgressBar } from './ProgressBar';
@@ -14,7 +14,6 @@ const featuredGitHubProjects = [
     stack: 'JavaScript',
     type: 'Framework',
     href: 'https://github.com/jamesthegreati/F.U.N.D.I.',
-    updatedAt: 'Updated Mar 2026',
   },
   {
     name: 'WishlistOps',
@@ -22,7 +21,6 @@ const featuredGitHubProjects = [
     stack: 'Python',
     type: 'Automation Platform',
     href: 'https://github.com/jamesthegreati/WishlistOps',
-    updatedAt: 'Updated Feb 2026',
   },
   {
     name: 'universal-claude-router',
@@ -30,7 +28,6 @@ const featuredGitHubProjects = [
     stack: 'TypeScript',
     type: 'Infrastructure',
     href: 'https://github.com/jamesthegreati/universal-claude-router',
-    updatedAt: 'Updated Nov 2025',
   },
   {
     name: 'crewai_llama3_arduino',
@@ -38,7 +35,6 @@ const featuredGitHubProjects = [
     stack: 'AI + Hardware',
     type: 'Experimental AI',
     href: 'https://github.com/jamesthegreati/crewai_llama3_arduino',
-    updatedAt: 'Updated May 2024',
   },
 ];
 
@@ -206,6 +202,8 @@ export function PortalCard({
 }
 
 export function Hub() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <VintagePageWrapper intensity="light">
   <ProgressBar />
@@ -699,25 +697,28 @@ export function Hub() {
                   href={project.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Open ${project.name} repository on GitHub`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: index * 0.12 }}
-                  whileHover={{ y: -8, scale: 1.01 }}
+                  whileHover={shouldReduceMotion ? undefined : { y: -8, scale: 1.01 }}
                   className="group relative overflow-hidden rounded-2xl border-2 border-[#1A3A52]/20 bg-gradient-to-br from-[#f4e9d9] via-[#f9f2e3] to-[#efe1c9] p-6 shadow-lg transition-all"
                 >
-                  <motion.div
-                    className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#D4A574]/20 blur-2xl"
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                  />
+                  {!shouldReduceMotion && (
+                    <motion.div
+                      className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#D4A574]/20 blur-2xl"
+                      animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+                      transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  )}
 
                   <div className="relative z-10">
                     <div className="flex items-center justify-between gap-3 mb-3">
                       <span className="inline-flex rounded-full bg-[#1A3A52] px-3 py-1 text-xs font-bold tracking-[0.16em] text-[#f4e9d9] uppercase">
                         {project.type}
                       </span>
-                      <span className="font-typewriter text-xs text-[#1A3A52]/70">{project.updatedAt}</span>
+                      <span className="font-typewriter text-xs tracking-[0.2em] uppercase text-[#1A3A52]/70">{project.stack}</span>
                     </div>
 
                     <h4 className="text-2xl font-elegant text-[#1A3A52] mb-2">{project.name}</h4>
@@ -734,9 +735,8 @@ export function Hub() {
                       initial={{ opacity: 0, y: 10 }}
                       whileHover={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.25 }}
-                      className="mt-4 flex items-center justify-between"
+                      className="mt-4 flex justify-end"
                     >
-                      <span className="font-typewriter text-xs tracking-[0.2em] uppercase text-[#1A3A52]/70">{project.stack}</span>
                       <span className="font-marquee text-sm text-[#1A3A52]">Open Repository →</span>
                     </motion.div>
                   </div>
